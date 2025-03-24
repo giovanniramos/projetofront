@@ -5,18 +5,21 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { DesaparecidosRoutingModule } from './desaparecidos/desaparecidos-routing.module';
+import { PainelRoutingModule } from './painel/painel-routing.module';
+import { DetalhesRoutingModule } from './detalhes/detalhes-routing.module';
 import { AppComponent } from './app.component';
-import { PaginaNaoEncontradaComponent } from './pagina-nao-encontrada/pagina-nao-encontrada.component';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    PaginaNaoEncontradaComponent
+    AppComponent
   ],
   imports: [
+    FormsModule,
     BrowserModule,
     AppRoutingModule,
-    DesaparecidosRoutingModule
+    DesaparecidosRoutingModule,
+    PainelRoutingModule,
+    DetalhesRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
