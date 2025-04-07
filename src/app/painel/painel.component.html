@@ -1,1 +1,137 @@
-<p>NOVO painel works!</p>
+<div class="px-0 mx-auto box-painel lg:container">
+
+  <!-- Search -->
+
+  <form [formGroup]="painelForm" #formDir="ngForm" class="box-form" (ngSubmit)="onSubmit(formDir.value)" novalidate>
+    <div class="flex flex-col items-center mt-0 mb-10 border-t-4 border-indigo-200">
+      <div class="grid grid-cols-2 gap-0 p-5 bg-indigo-100 shadow-sm rounded-b-xl">
+        <div class="flex flex-col gap-4 lg:flex-row">
+
+          <div class="gap-4 font-semibold">
+            <span class="flex mb-2">Por sexo</span>
+            <select (change)="handleSearchChange()" id="sexo" name="sexo" formControlName="sexo" class="w-48 p-2 text-gray-700 border rounded-md">
+              <option value="">Todos os sexos</option>
+              <option value="MASCULINO">Masculino</option>
+              <option value="FEMININO">Feminino</option>
+            </select>
+          </div>
+
+          <div class="gap-4 font-semibold">
+            <span class="flex mb-2">Por situação</span>
+            <select (change)="handleSearchChange()" id="status" name="status" formControlName="status" class="w-48 p-2 text-gray-700 border rounded-md">
+              <option value="">Todas as situações</option>
+              <option value="LOCALIZADO">Localizados</option>
+              <option value="DESAPARECIDO">Desaparecidos</option>
+            </select>
+          </div>
+
+          <div class="gap-4 font-semibold">
+            <span class="flex mb-2">Por faixa etária</span>
+            <select (change)="handleSearchChange()" id="faixa" name="faixa" formControlName="faixa" class="w-48 p-2 text-gray-700 border rounded-md">
+              <option value="">Todos as idades</option>
+              <option value="1">Infantil (0-12 anos)</option>
+              <option value="2">Adolescente (13-17 anos)</option>
+              <option value="3">Adulto (18-64 anos)</option>
+              <option value="4">Idoso (65+ anos)</option>
+            </select>
+          </div>
+
+          <div class="gap-4 font-semibold">
+            <span class="flex mb-2">Por nome</span>
+            <input (input)="handleSearchChange()" id="nome" name="nome" formControlName="nome" type="text" class="w-48 p-2 text-gray-700 border rounded-md" placeholder="Informe um nome..." />
+          </div>
+
+          <div class="gap-4 font-semibold">
+            <button type="submit" class="btn-green btn-mini px-7 py-1.5 mt-7 duration-150">
+              <svg class="w-6 h-6 mt-1 mr-1" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+              </svg>
+              Consultar
+            </button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </form>
+
+  <!-- Pagination -->
+
+  <pagination-template #p="paginationApi" maxSize="5" (pageChange)="handlePageChange($event)" *ngIf="contentReady">
+    <div class="flex p-4 mb-8">
+      <div class="ml-auto"></div>
+      <div class="ml-5">
+        <nav class="inline-flex items-center p-1 space-x-2 bg-indigo-100 rounded">
+          <button class="btn-nave" (click)="p.previous()" [class.disabled]="p.isFirstPage()" [disabled]="p.isFirstPage()">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z" />
+            </svg>
+            <span class="pr-2 text-sm font-medium leading-5">Anterior</span>
+          </button>
+
+          <button class="btn-nave" (click)="p.setCurrent(page.value)" [disabled]="p.getCurrent() === page.value" [class.current]="p.getCurrent() === page.value" *ngFor="let page of p.pages">
+            <span class="w-5 h-5 text-sm font-medium leading-5">{{ page.label }}</span>
+          </button>
+
+          <button class="btn-nave" (click)="p.next()" [class.disabled]="p.isLastPage()" [disabled]="p.isLastPage()">
+            <span class="pl-2 text-sm font-medium leading-5">Próximo</span>
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z" />
+            </svg>
+          </button>
+        </nav>
+      </div>
+    </div>
+  </pagination-template>
+
+</div>
+
+
+
+<!-- Cards -->
+
+<div class="flex items-center justify-center box-container" *ngIf="searchLoading && !contentReady">
+  <div class="mt-4 text-2xl font-bold text-indigo-600">
+    <h1>Sem resultados na busca!</h1>
+  </div>
+</div>
+
+<div class="flex items-center justify-center mb-12 box-container" *ngIf="contentReady">
+
+  <div class="gap-5 space-y-4 box-cards md:px-4 md:grid md:grid-cols-2 lg:grid-cols-3 md:space-y-0">
+
+    <div class="max-w-sm border-2 border-transparent cursor-default card w-80 hover:border-indigo-500" *ngFor="let item of listContent | paginate : pagingConfig; let i = index" [class.active]="i == currentIndex">
+      <h3 class="mb-3 text-lg font-bold text-indigo-600">{{ item.cidade | camelcase | statecase | replacecase : '[/]' : ' - ' }}</h3>
+      <div class="relative bg-gray-200 rounded-lg">
+        <div class="flex items-center justify-center">
+          <img class="w-auto h-40" [src]="item.urlFoto" alt="" />
+        </div>
+        <p class="tag" [ngClass]="item.localizado ? 'tag-green' : 'tag-red'">{{ item.situacao }}</p>
+      </div>
+
+      <h1 class="mt-4 text-xl font-bold text-gray-800">{{ item.nome | camelcase }}</h1>
+      <div class="my-4 mb-0">
+        <div class="flex items-center space-x-1">
+          <svg class="w-6 h-6 mt-1 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          <p>{{ item.ultimaOcorrencia?.dtDesaparecimento | date:'short' }}</p>
+        </div>
+        <div class="flex items-center space-x-1">
+          <svg class="w-6 h-6 mt-1 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 4v12l-4-2-4 2V4M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+          </svg>
+          <p>{{ item.ultimaOcorrencia?.localDesaparecimentoConcat | camelcase | statecase }}</p>
+        </div>
+
+        <div class="mt-4 rounded-md shadow">
+          <button [routerLink]="['/detalhes', item.id]" class="w-full py-2 text-sm font-semibold tracking-wide btn-indigo btn-focus md:text-base">
+            Exibir detalhes
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>

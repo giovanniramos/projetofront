@@ -1,0 +1,26 @@
+<div class="relative box-topo" *ngIf="isTelaPermitida">
+
+  <div class="md:flex">
+
+    <div class="hidden md:flex-shrink-0 md:block">
+      <img class="w-24 h-24 rounded-lg" src="assets/images/desaparecidos.png">
+    </div>
+    <div class="mt-4 md:mt-0 md:ml-6">
+      <div class="text-sm font-bold tracking-wide text-indigo-600 uppercase">
+        Seplag Serviços
+      </div>
+      <div class="mt-1 text-2xl font-bold leading-tight text-gray-900">
+        Serviço de busca de desaparecidos
+      </div>
+      <div *ngIf="showMessage$ | async as result" class="mt-2 text-sm text-gray-600 sm:text-base">
+        <p>
+          Utilize o filtro abaixo para realizar a sua consulta.
+        </p>
+      </div>
+    </div>
+
+  </div>
+
+  <span class="absolute inset-x-0 bottom-0 h-2 bg-gradient-to-r from-green-300 via-blue-500 to-purple-600"></span>
+
+</div>

@@ -1,5 +1,6 @@
-module.exports = {
-  purge: ["./src/**/*.html", "./src/**/*.ts"],
+const config = {
+  content: ["./src/**/*.{html,js,ts}"],
+  purge: ["./src/**/*.{html,ts}"],
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {},
@@ -7,5 +8,12 @@ module.exports = {
   variants: {
     extend: {},
   },
-  plugins: [],
+  plugins: [
+    require("@tailwindcss/forms"),
+    require("@tailwindcss/typography")({
+      modifiers: [],
+    }),
+  ],
 };
+
+module.exports = config;

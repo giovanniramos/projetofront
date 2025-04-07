@@ -7,9 +7,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DesaparecidosComponent implements OnInit {
 
-  constructor() { }
-
-  ngOnInit(): void {
+  constructor(
+  ) {
   }
+
+  ngOnInit(): void { }
 
 }

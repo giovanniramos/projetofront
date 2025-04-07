@@ -1,0 +1,21 @@
+/* Page error - custom style */
+
+@layer components {
+
+  .box-error {
+    @apply grid place-items-center mx-2 my-20 sm:my-auto;
+  }
+
+  .box-error-code {
+    @apply text-6xl md:text-7xl lg:text-9xl font-bold tracking-wider text-gray-300;
+  }
+
+  .box-error-title {
+    @apply text-2xl md:text-3xl lg:text-5xl font-bold tracking-wider text-gray-500 mt-4;
+  }
+
+  .box-error-message {
+    @apply text-base mt-4 pb-4 border-b-2 text-center text-gray-500;
+  }
+
+}

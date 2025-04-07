@@ -4,9 +4,10 @@ import { RouterModule, Routes } from '@angular/router';
 import { PaginaNaoEncontradaComponent } from './pagina-nao-encontrada/pagina-nao-encontrada.component';
 
 const routes: Routes = [
-  { path: 'desaparecidos', loadChildren: async () => (await import('./desaparecidos/desaparecidos.module')).DesaparecidosModule },
-  { path: 'desaparecidos-painel', loadChildren: () => import('./painel/painel.module').then(m => m.PainelModule) },
-  { path: 'desaparecidos-detalhes', loadChildren: () => import('./detalhes/detalhes.module').then(m => m.DetalhesModule) },
+  { path: '', loadChildren: async () => (await import('./desaparecidos/desaparecidos.module')).DesaparecidosModule },
+  { path: 'painel', loadChildren: async () => (await import('./painel/painel.module')).PainelModule },
+  { path: 'detalhes', loadChildren: async () => (await import('./detalhes/detalhes.module')).DetalhesModule },
+  { path: '', redirectTo: 'painel', pathMatch: 'full' },
   { path: '**', component: PaginaNaoEncontradaComponent }
 ];
 
