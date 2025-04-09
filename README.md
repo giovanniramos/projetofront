@@ -55,13 +55,14 @@ Instale o [Docker Desktop](https://www.docker.com/) para empacotar e rodar a apl
 
 - Execute os comandos a seguir:
   > ```docker build -t seplag-spa .```
+  
   > ```docker run -p 3000:3000 seplag-spa```
 
 - Ou se preferir via Docker Compose:
   > ```docker compose up --build```
   
-- Em seguida navegue até:
-  > `http://localhost:3000/` 
+- Em seguida, acesse seu navegador em:
+  [http://localhost:3000](http://localhost:3000)
 
 
 ---
@@ -100,7 +101,7 @@ No diretório do projeto abra o Prompt de Comando e rode os comandos abaixo:
 
 #### 📊 Testando em ambiente local
 
-- Execute `ng serve` para iniciar um servidor local e navegue até:
-  > `http://localhost:4200/`
+- Execute `ng serve` para iniciar um servidor local e navegue até: 
+  [http://localhost:4200](http://localhost:4200)
 
 
