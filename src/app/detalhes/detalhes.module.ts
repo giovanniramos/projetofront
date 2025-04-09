@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '../shared-modules/shared.module';
 
+import { ToastrModule } from 'ngx-toastr';
+
 import { DetalhesRoutingModule } from './detalhes-routing.module';
 
 import { DetalhesComponent } from './detalhes.component';
@@ -22,7 +24,15 @@ export const options: Partial<null | IConfig> | (() => Partial<IConfig>) = null;
     SharedModule,
     ReactiveFormsModule,
     DetalhesRoutingModule,
-    NgxMaskModule.forRoot(),
+    ToastrModule.forRoot({
+      timeOut: 5000,
+      positionClass: 'toast-top-right',
+      preventDuplicates: false,
+      progressBar: true,
+      closeButton: true,
+      onActivateTick: false
+    }),
+    NgxMaskModule.forRoot()
   ]
 })
 export class DetalhesModule { }

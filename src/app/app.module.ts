@@ -11,6 +11,9 @@ import { DesaparecidosRoutingModule } from './desaparecidos/desaparecidos-routin
 import { AppComponent } from './app.component';
 import { PaginaTopoComponent } from './pagina-topo/pagina-topo.component';
 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
+
 import { NgxMaskModule, IConfig } from 'ngx-mask';
 export const options: Partial<null | IConfig> | (() => Partial<IConfig>) = null;
 
@@ -36,6 +39,15 @@ registerLocaleData(localePT);
     PainelRoutingModule,
     DetalhesRoutingModule,
     DesaparecidosRoutingModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot({
+      timeOut: 5000,
+      positionClass: 'toast-top-right',
+      preventDuplicates: false,
+      progressBar: true,
+      closeButton: true,
+      onActivateTick: false
+    }),
     NgxMaskModule.forRoot(),
     StoreModule.forRoot({ data: fromApp.AppReducer }),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),

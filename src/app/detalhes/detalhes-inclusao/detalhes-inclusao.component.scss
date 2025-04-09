@@ -1,0 +1,21 @@
+.modal {
+  @apply fixed inset-0 flex items-center justify-center z-50;
+}
+
+.modal-dialog {
+  @apply fixed inset-0 overflow-y-auto z-10;
+}
+
+.modal-panel {
+  @apply flex min-h-full p-4 sm:p-0 text-center items-center justify-center;
+}
+
+.modal-content {
+  @apply w-full inline-block align-bottom text-left;
+  @apply bg-white overflow-hidden border rounded-lg shadow-lg;
+  @apply transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full;
+}
+
+.modal-overlay {
+  @apply fixed inset-0 bg-black opacity-90 transition-opacity;
+}

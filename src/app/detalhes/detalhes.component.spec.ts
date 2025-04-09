@@ -5,6 +5,8 @@ import { DetalhesComponent } from './detalhes.component';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 
+import { ToastrModule } from 'ngx-toastr';
+
 describe('DetalhesComponent', () => {
   let component: DetalhesComponent;
   let fixture: ComponentFixture<DetalhesComponent>;
@@ -14,6 +16,7 @@ describe('DetalhesComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
+        ToastrModule.forRoot(),
         RouterTestingModule,
         HttpClientModule
       ],

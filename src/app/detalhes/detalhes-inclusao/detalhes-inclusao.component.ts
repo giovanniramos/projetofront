@@ -3,7 +3,8 @@ import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms'
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 
-import { MessageService } from 'src/app/services/message.service';
+import { ToastrService } from 'ngx-toastr';
+
 import { DesaparecidosService } from 'src/app/services/desaparecidos.service';
 
 import { OcorrenciaDesaparecido } from './../../interfaces/ocorrencia-desaparecido.interface';
@@ -28,11 +29,13 @@ export class DetalhesInclusaoComponent implements OnInit, OnDestroy {
   submitted = false;
   detalhesInclusaoForm: FormGroup;
 
+  isModalOpen = false;
+
   constructor(
+    private toastr: ToastrService,
     private formBuilder: FormBuilder,
     private activatedRoute: ActivatedRoute,
-    private desaparecidosService: DesaparecidosService,
-    public messageService: MessageService,
+    private desaparecidosService: DesaparecidosService
   ) {
     this.detalhesInclusaoForm = formBuilder.group({
       informacao: [null, [Validators.required, Validators.minLength(1), Validators.maxLength(140)]],
@@ -95,9 +98,13 @@ export class DetalhesInclusaoComponent implements OnInit, OnDestroy {
             ['informacao', 'descricao', 'data'].map(controlName => {
               form.get(controlName).reset();
             });
+
+            this.isModalOpen = false;
+
+            this.toastr.success('Registro enviado com sucesso...');
           },
           (error) =>
-            this.messageService.add('ERROR: onSubmit()', error)
+            this.toastr.error(error, 'ERROR!')
         );
     }
   }
@@ -119,6 +126,25 @@ export class DetalhesInclusaoComponent implements OnInit, OnDestroy {
         this.validateAllFormFields(control);
       }
     });
+  }
+
+
+  public openModal(content): void {
+    this.detalhesInclusaoForm.patchValue({
+      id: content.id,
+      ocoId: content.ocorrencia?.ocoId
+    });
+
+    this.isModalOpen = true;
+  }
+
+  public closeModal(): void {
+    this.detalhesInclusaoForm.patchValue({
+      id: '',
+      ocoId: ''
+    });
+
+    this.isModalOpen = false;
   }
 
 }

@@ -5,6 +5,8 @@ import { DetalhesInclusaoComponent } from './detalhes-inclusao.component';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 
+import { ToastrModule } from 'ngx-toastr';
+
 import { HttpClientModule } from '@angular/common/http';
 
 describe('DetalhesInclusaoComponent', () => {
@@ -14,6 +16,7 @@ describe('DetalhesInclusaoComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
+        ToastrModule.forRoot(),
         RouterTestingModule,
         ReactiveFormsModule,
         HttpClientModule

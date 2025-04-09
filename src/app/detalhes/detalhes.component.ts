@@ -2,7 +2,8 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 
-import { MessageService } from '../services/message.service';
+import { ToastrService } from 'ngx-toastr';
+
 import { DesaparecidosService } from '../services/desaparecidos.service';
 
 import { Desaparecidos, DesaparecidosConteudo } from '../data/desaparecidos';
@@ -24,9 +25,9 @@ export class DetalhesComponent implements OnInit, OnDestroy {
   private subscription: Subscription;
 
   constructor(
+    private toastr: ToastrService,
     private activatedRoute: ActivatedRoute,
-    private desaparecidosService: DesaparecidosService,
-    public messageService: MessageService
+    private desaparecidosService: DesaparecidosService
   ) {
   }
 
@@ -86,7 +87,8 @@ export class DetalhesComponent implements OnInit, OnDestroy {
 
           this.content = content;
         },
-        (error) => this.messageService.add('ERROR: getDesaparecido()', error)
+        (error) =>
+          this.toastr.error(error, 'ERROR!')
       );
   }
 

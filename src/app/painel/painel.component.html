@@ -1,8 +1,7 @@
 <div class="px-0 mx-auto box-painel lg:container">
 
-  <!-- Search -->
-
-  <form [formGroup]="painelForm" #formDir="ngForm" class="box-form" (ngSubmit)="onSubmit(formDir.value)" novalidate>
+  <!-- Form - Search -->
+  <form class="box-form" [formGroup]="painelForm" #formDir="ngForm" (ngSubmit)="onSubmit(formDir.value)" novalidate>
     <div class="flex flex-col items-center mt-0 mb-10 border-t-4 border-indigo-200">
       <div class="grid grid-cols-2 gap-0 p-5 bg-indigo-100 shadow-sm rounded-b-xl">
         <div class="flex flex-col gap-4 lg:flex-row">
@@ -55,8 +54,8 @@
     </div>
   </form>
 
-  <!-- Pagination -->
 
+  <!-- Pagination -->
   <pagination-template #p="paginationApi" maxSize="5" (pageChange)="handlePageChange($event)" *ngIf="contentReady">
     <div class="flex p-4 mb-8">
       <div class="ml-auto"></div>
@@ -87,15 +86,7 @@
 </div>
 
 
-
 <!-- Cards -->
-
-<div class="flex items-center justify-center box-container" *ngIf="searchLoading && !contentReady">
-  <div class="mt-4 text-2xl font-bold text-indigo-600">
-    <h1>Sem resultados na busca!</h1>
-  </div>
-</div>
-
 <div class="flex items-center justify-center mb-12 box-container" *ngIf="contentReady">
 
   <div class="gap-5 space-y-4 box-cards md:px-4 md:grid md:grid-cols-2 lg:grid-cols-3 md:space-y-0">

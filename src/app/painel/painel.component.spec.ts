@@ -6,7 +6,8 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgxPaginationModule } from 'ngx-pagination';
 
-import { MessageService } from '../services/message.service';
+import { ToastrModule } from 'ngx-toastr';
+
 import { DesaparecidosService } from '../services/desaparecidos.service';
 
 import { StoreModule } from '@ngrx/store';
@@ -19,13 +20,13 @@ describe('PainelComponent', () => {
 
   let store: Store<fromApp.AppState>;
   let httpClient: HttpClient;
-  let messageService: MessageService;
   let desaparecidosService: DesaparecidosService;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
         StoreModule.forRoot({ data: fromApp.AppReducer }), // Register the reducer
+        ToastrModule.forRoot(),
         HttpClientModule,
         ReactiveFormsModule,
         NgxPaginationModule
@@ -37,7 +38,6 @@ describe('PainelComponent', () => {
 
     store = TestBed.inject(Store);
     httpClient = TestBed.inject(HttpClient);
-    messageService = TestBed.inject(MessageService);
     desaparecidosService = TestBed.inject(DesaparecidosService);
   });
 

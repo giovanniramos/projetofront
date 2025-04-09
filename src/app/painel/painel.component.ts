@@ -2,7 +2,8 @@ import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { Store } from '@ngrx/store';
 
-import { MessageService } from '../services/message.service';
+import { ToastrService } from 'ngx-toastr';
+
 import { DesaparecidosService } from '../services/desaparecidos.service';
 
 import { Pessoas } from '../data/pessoas';
@@ -45,9 +46,9 @@ export class PainelComponent implements PagingConfig {
 
   constructor(
     private store: Store,
+    private toastr: ToastrService,
     private formBuilder: FormBuilder,
-    private desaparecidosService: DesaparecidosService,
-    public messageService: MessageService
+    private desaparecidosService: DesaparecidosService
   ) {
     this.painelForm = formBuilder.group({
       nome: [''],
@@ -94,6 +95,10 @@ export class PainelComponent implements PagingConfig {
           this.searchLoading = true;
           this.contentReady = (empty === true) ? false : true;
 
+          if (this.searchLoading && !this.contentReady) {
+            this.toastr.info('Sem resultados na sua busca...');
+          }
+
           this.pagingConfig.totalItems = totalElements;
 
           const fotoPadrao = this.fotoPadrao;
@@ -121,7 +126,8 @@ export class PainelComponent implements PagingConfig {
 
           this.listContent = content;
         },
-        (error) => this.messageService.add('ERROR: getDesaparecidos()', error)
+        (error) =>
+          this.toastr.error(error, 'ERROR!')
       );
   }
 
