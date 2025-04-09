@@ -10,7 +10,7 @@
 
 ### Sobre o Projeto
 
-Este projeto foi desenvolvido sendo uma aplicação SPA com carregamento lento (lazy loading) de módulos.
+Este projeto foi desenvolvido sendo uma aplicação SPA (Single Page Application) com carregamento lento (Lazy Loading) de módulos.
 
 Foram aplicadas conceitos de UI/UX design para tornar a experiência do usuário muito mais fluída e intuitiva durante toda a navegação, e a página principal fornece acesso direto ao serviço de consulta de pessoas desaparecidas, consumindo os endpoints do **ABITUS API REST**, disponibilizados pela Polícia Judiciária Civil de Mato Grosso no seguinte link swagger: https://abitus-api.geia.vip/swagger-ui/index.html. 
 
@@ -62,7 +62,7 @@ Instale o [Docker Desktop](https://www.docker.com/) para empacotar e rodar a apl
   > ```docker compose up --build```
   
 - Em seguida, acesse seu navegador em:
-  [http://localhost:3000](http://localhost:3000)
+  http://localhost:3000
 
 
 ---
@@ -102,6 +102,6 @@ No diretório do projeto abra o Prompt de Comando e rode os comandos abaixo:
 #### 📊 Testando em ambiente local
 
 - Execute `ng serve` para iniciar um servidor local e navegue até: 
-  [http://localhost:4200](http://localhost:4200)
+  http://localhost:4200
 
 

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { Store } from '@ngrx/store';
 
@@ -19,7 +19,7 @@ import * as actions from '../store/app.actions';
   templateUrl: './painel.component.html',
   styleUrls: ['./painel.component.scss']
 })
-export class PainelComponent implements PagingConfig {
+export class PainelComponent implements OnInit, PagingConfig {
 
   itemsPerPage = 12;
   currentPage = 0;
@@ -66,6 +66,10 @@ export class PainelComponent implements PagingConfig {
   get sexo(): any { return this.painelForm.get('sexo'); }
   get faixa(): any { return this.painelForm.get('faixa'); }
   get status(): any { return this.painelForm.get('status'); }
+
+  ngOnInit(): void {
+    this.getDesaparecidos();
+  }
 
   public onSubmit(pagingFilter: PagingFilter): void {
     if (!this.painelForm.valid) {
